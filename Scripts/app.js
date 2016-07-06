@@ -12,43 +12,28 @@
 (function () {
     "use strict";
 
-    // references to HTMLElements
-    var rollButton = document.getElementById("rollButton");
-    var diceResult = document.getElementById("diceResult");
-    var today = new Date("2016-12-01 09:52:29");
-    var old = new Date();
+    // 2 DIFFERENT WAYS TO CREATE AN OBJECT
+    // Literal Notation
+    var User = {
+        ID: "1",
+        Name: "admin",
+        Email: "admin@example.com",
+        Password: "123456",
+        Courses: ["COMP123", "COMP125", "COMP397", "COMP392"]
+    };
+
+    // Object Notation
+    var NewUser = new Object();
+    NewUser.Name = "Mary";
+    NewUser.Email = "mary@example.com";
+    NewUser.Password = "456789";
 
     function init() {
-        console.log('Application Started...');
-        console.log(today);
+        console.log('Application Started');
+        NewUser.Role = "Editor";
+        console.log(User.Courses[0]);
     }
 
-    function getCurrentTime(date) {
-        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-        var milliseconds = date.getMilliseconds().toString().substring(0, 2);
-        var currentTime = hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
-        return currentTime;
-    }
-
-    function getElapsedTime(oldTime, newTime) {
-        var elapsedTime = newTime - oldTime;
-        var elapsedSeconds = new Date(elapsedTime);
-        return elapsedSeconds.getSeconds() < 10 ? "0" + elapsedSeconds.getSeconds() : "" + elapsedSeconds.getSeconds();
-    }
-
-    function diceRoll() {
-        var die1 = Math.floor((Math.random() * 6) + 1); // we never get to 6, 0 to 5 so we have to +1
-        var die2 = Math.floor((Math.random() * 6) + 1);
-        var total = die1 + die2;
-        var now = new Date();
-
-        diceResult.innerHTML = "<h2>" + total + " --> TimeStamp: " + getCurrentTime(now) + "</h2>" + "<h3> Elapsed Seconds: " + getElapsedTime(old, now) + "</h3>";
-        old = now;
-    }
-
-    rollButton.addEventListener("click", diceRoll);
 
     // call init functin when window finishes loading
     window.addEventListener("load", init);
