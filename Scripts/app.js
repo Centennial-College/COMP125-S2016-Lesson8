@@ -12,26 +12,64 @@
 (function () {
     "use strict";
 
-    // 2 DIFFERENT WAYS TO CREATE AN OBJECT
-    // Literal Notation
+    var name = "John";
+
+    var Course1 = {
+        ID: "1",
+        Name: "COMP123",
+        Description: "Programming 2"
+    }
+    var Course2 = {
+        ID: "2",
+        Name: "COMP125",
+        Description: "Client-Side Web Development"
+    }
+    var Course3 = {
+        ID: "3",
+        Name: "COMP397",
+        Description: "Web Game Programming"
+    }
+    var Course4 = {
+        ID: "4",
+        Name: "COMP392",
+        Description: "Advanced Graphics"
+    }
+
     var User = {
         ID: "1",
         Name: "admin",
         Email: "admin@example.com",
         Password: "123456",
-        Courses: ["COMP123", "COMP125", "COMP397", "COMP392"]
+        Courses: [Course1, Course2, Course3, Course4],
+        DropCourse: function (courseIndex) {
+            this.Courses.splice(courseIndex, 1);
+        }
     };
 
-    // Object Notation
-    var NewUser = new Object();
-    NewUser.Name = "Mary";
-    NewUser.Email = "mary@example.com";
-    NewUser.Password = "456789";
+    var Person = {
+        Person: function (name, age) {
+            this.Name = name;
+            this.Age = age;
+        }
+    }
 
     function init() {
         console.log('Application Started');
-        NewUser.Role = "Editor";
-        console.log(User.Courses[0]);
+        Person.saysHello();
+
+        console.log(name + " says hello!");
+
+        // for in loop  
+        // course is the iterator, not the actual object like C#
+        for (var course in User.Courses) {
+            console.log("Couurse" + course + ":" + User.Courses[course].Name)
+        }
+
+        // foreach loop
+        User.Courses.forEach(function (course) {
+            console.log("Couurse" + course + ":" + User.Courses[course].Name)
+
+        }, this);
     }
 
 
