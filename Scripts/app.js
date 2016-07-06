@@ -16,6 +16,7 @@
     var rollButton = document.getElementById("rollButton");
     var diceResult = document.getElementById("diceResult");
     var today = new Date("2016-12-01 09:52:29");
+    var old = new Date();
 
     function init() {
         console.log('Application Started...');
@@ -31,13 +32,20 @@
         return currentTime;
     }
 
+    function getElapsedTime(oldTime, newTime) {
+        var elapsedTime = newTime - oldTime;
+        var elapsedSeconds = new Date(elapsedTime);
+        return elapsedSeconds.getSeconds() < 10 ? "0" + elapsedSeconds.getSeconds() : "" + elapsedSeconds.getSeconds();
+    }
+
     function diceRoll() {
         var die1 = Math.floor((Math.random() * 6) + 1); // we never get to 6, 0 to 5 so we have to +1
         var die2 = Math.floor((Math.random() * 6) + 1);
         var total = die1 + die2;
         var now = new Date();
 
-        diceResult.innerHTML = "<h2>" + total + " --> TimeStamp: " + getCurrentTime(now) + "</h2>";
+        diceResult.innerHTML = "<h2>" + total + " --> TimeStamp: " + getCurrentTime(now) + "</h2>" + "<h3> Elapsed Seconds: " + getElapsedTime(old, now) + "</h3>";
+        old = now;
     }
 
     rollButton.addEventListener("click", diceRoll);
