@@ -46,30 +46,29 @@
         }
     };
 
-    var Person = {
-        Person: function (name, age) {
+    // Person Class +++++++++++++++++++++++++++++++++++++
+    var Person = (function () {
+        // CONSTRUCTOR ++++++++++++++++++++++++++++++++++
+        function Person(name, age) {
             this.Name = name;
             this.Age = age;
         }
-    }
 
-    function init() {
-        console.log('Application Started');
-        Person.saysHello();
-
-        console.log(name + " says hello!");
-
-        // for in loop  
-        // course is the iterator, not the actual object like C#
-        for (var course in User.Courses) {
-            console.log("Couurse" + course + ":" + User.Courses[course].Name)
+        // METHODS ++++++++++++++++++++++++++++++++++++++
+        Person.prototype.SaysHello = function () {
+            console.log(this.Name + " says Hello!");
         }
 
-        // foreach loop
-        User.Courses.forEach(function (course) {
-            console.log("Couurse" + course + ":" + User.Courses[course].Name)
+        return Person;
+    } ());
 
-        }, this);
+    function init() {
+        var person = new Person("Tom", 47);
+        person.SaysHello();
+        console.log("age: " + person.Age);
+        person.Age = 23;
+        console.log("age: " + person.Age);
+
     }
 
 
