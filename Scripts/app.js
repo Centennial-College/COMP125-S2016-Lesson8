@@ -15,16 +15,29 @@
     // references to HTMLElements
     var rollButton = document.getElementById("rollButton");
     var diceResult = document.getElementById("diceResult");
+    var today = new Date("2016-12-01 09:52:29");
 
     function init() {
         console.log('Application Started...');
+        console.log(today);
+    }
+
+    function getCurrentTime(date) {
+        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        var milliseconds = date.getMilliseconds().toString().substring(0, 2);
+        var currentTime = hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
+        return currentTime;
     }
 
     function diceRoll() {
         var die1 = Math.floor((Math.random() * 6) + 1); // we never get to 6, 0 to 5 so we have to +1
         var die2 = Math.floor((Math.random() * 6) + 1);
         var total = die1 + die2;
-        diceResult.innerHTML = "<h2>" + total + "</h2>";
+        var now = new Date();
+
+        diceResult.innerHTML = "<h2>" + total + " --> TimeStamp: " + getCurrentTime(now) + "</h2>";
     }
 
     rollButton.addEventListener("click", diceRoll);
